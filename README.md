@@ -126,6 +126,8 @@ Upgrade pip and install the required packages:
 
 ```bash
 pip install --upgrade pip
+pip install --upgrade pip wheel
+pip install setuptools==57.5.0
 pip install -r requirements.txt
 ```
 
