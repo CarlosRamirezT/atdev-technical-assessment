@@ -3,9 +3,13 @@ from app.routes import payroll
 
 app = FastAPI(
     title="Paystub Notifier API",
-    description="API para procesar planillas, generar recibos de pago y enviarlos por correo electrónico.",
+    description="API for processing payroll CSV files and sending paystub PDFs via email.",
     version="1.0.0"
 )
+
+@app.get("/")
+async def read_root():
+    return {"message": "Welcome to the Paystub Notifier API"}
 
 app.include_router(payroll.router, prefix="/api", tags=["Payroll"])
 
