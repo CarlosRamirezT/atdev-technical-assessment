@@ -10,7 +10,7 @@ router = APIRouter()
 
 @router.post("/process", summary="Process payroll CSV file and send paystub PDFs")
 async def process_payroll(
-    company_name: str = Query(..., description="Name of the company"),
+    company: str = Query(..., description="Name of the company"),
     country: str = Query(default="do", description="Country code (default: 'do')"),
     file: UploadFile = File(..., description="CSV file containing payroll data")
 ):
@@ -45,7 +45,7 @@ async def process_payroll(
 
     for entry in entries:
         try:
-            pdf_path = generate_pdf(entry, company_name)
+            pdf_path = generate_pdf(entry, company)
             send_email(entry.email, pdf_path)
             email_responses.append({
                 "email": entry.email,
