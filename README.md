@@ -136,7 +136,7 @@ pip install -r requirements.txt
 Start the application using uvicorn:
 
 ```bash
-uvicorn app.main:app --host 0.0.0.0 --port 3000 --reload
+uvicorn app.main:app --host 127.0.0.1 --port 3000 --reload
 ```
 
 The API will be accessible at [http://localhost:3000](http://localhost:3000). Verify its functionality by visiting the interactive API docs at [http://localhost:3000/docs](http://localhost:3000/docs).
