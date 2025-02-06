@@ -1,8 +1,4 @@
-Below is the complete `README.md` file in English, including a detailed "How To Install (Mac/Linux)" section with instructions for installing Docker on both Mac and Linux, cloning the project, building it, verifying that the container is running, and testing connectivity on port 3000.
 
----
-
-```markdown
 # ATDEV Technical Assessment - Paystub Notifier API
 
 Notification Automation Project in FastAPI for the ATDEV Technical Assessment.
