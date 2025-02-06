@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paystub>
+    <company>{{ company_name }}</company>
+    <employee>
+        <full_name>{{ full_name }}</full_name>
+        <position>{{ position }}</position>
+        <gross_salary>{{ gross_salary }}</gross_salary>
+        <net_payment>{{ net_payment }}</net_payment>
+    </employee>
+</paystub>
