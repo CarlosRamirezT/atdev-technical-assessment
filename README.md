@@ -131,7 +131,15 @@ pip install setuptools==57.5.0
 pip install -r requirements.txt
 ```
 
-### 6. Run the Application
+### 6. Install wkhtmltox
+
+```bash
+curl -LO https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.macos-cocoa.pkg
+sudo installer -pkg wkhtmltox-0.12.6-1.macos-cocoa.pkg -target /
+wkhtmltopdf --version
+```
+
+### 7. Run the Application
 
 Start the application using uvicorn:
 
@@ -141,7 +149,7 @@ uvicorn app.main:app --host 127.0.0.1 --port 3000 --reload
 
 The API will be accessible at [http://localhost:3000](http://localhost:3000). Verify its functionality by visiting the interactive API docs at [http://localhost:3000/docs](http://localhost:3000/docs).
 
-### 7. Test the Application
+### 8. Test the Application
 
 To confirm that the application is running, you can:
 
@@ -230,6 +238,13 @@ To execute all unit and integration tests, run:
 
 ```bash
 pytest --maxfail=1 --disable-warnings -q
+```
+
+To send a file using curl in terminal, run from inside the project folder:
+
+```bash
+curl -X POST "http://localhost:3000/api/process?country=do&credentials=user+pwd&company=atdev" \
+     -F "file=@app/tests/test_data/test_sample.csv"
 ```
 
 ## Contributing
