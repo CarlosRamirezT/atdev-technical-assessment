@@ -38,7 +38,7 @@ def generate_pdf(entry, company_name):
     html_doc = transform(xml_doc)
     html_str = etree.tostring(html_doc, pretty_print=True, encoding="utf-8").decode("utf-8")
     
-    pdf_dir = "paystubs"
+    pdf_dir = config.FILES_PATH
     if not os.path.exists(pdf_dir):
         os.makedirs(pdf_dir)
     
