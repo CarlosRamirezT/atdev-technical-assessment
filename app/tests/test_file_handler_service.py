@@ -1,6 +1,6 @@
 import os
 from app.services.file_handler import process_csv
-from app.models import PayrollEntry
+from app.models.payroll_entry import PayrollEntry
 import pytest
 
 def test_process_csv_success():

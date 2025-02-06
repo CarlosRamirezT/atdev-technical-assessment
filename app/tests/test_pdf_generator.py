@@ -1,9 +1,9 @@
 import os
 import pytest
 from app.services import pdf_generator
-from app.models import PayrollEntry
+from app.models.payroll_entry import PayrollEntry
 
-from app.tests.data.fixtures import dummy_entry, dummy_entry_two, patch_pdfkit
+from app.tests.test_data.payroll_fixtures_sample import dummy_entry, dummy_entry_two, patch_pdfkit
 
 def test_generate_pdf_structure(dummy_entry, patch_pdfkit):
     company_name = "Test Company"

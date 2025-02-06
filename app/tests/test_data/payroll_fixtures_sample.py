@@ -1,7 +1,7 @@
 import jinja2
 import os
 import pytest
-from app.models import PayrollEntry
+from app.models.payroll_entry import PayrollEntry
 from app.services import pdf_generator
 
 # Fixture para el primer ejemplo de entrada
