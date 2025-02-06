@@ -1,4 +1,4 @@
-Below is the complete `README.md` file in markdown format with the entire "How To Install (Mac/Linux)" section included:
+Below is the complete `README.md` file in English, including a detailed "How To Install (Mac/Linux)" section with instructions for installing Docker on both Mac and Linux, cloning the project, building it, verifying that the container is running, and testing connectivity on port 3000.
 
 ---
 
@@ -156,13 +156,75 @@ curl http://localhost:3000/
 
 ## Docker & Docker Compose
 
-If you prefer to run the application in a container, ensure that Docker and Docker Compose are installed, then run:
+### Installing Docker
 
-```bash
-docker-compose up --build
-```
+#### On Mac:
 
-The API will start on the configured port (default: 3000).
+- Download and install **[Docker Desktop for Mac](https://www.docker.com/products/docker-desktop)**.
+- Follow the installer instructions and ensure Docker Desktop is running.
+
+#### On Linux:
+
+- Follow the official Docker documentation for installing Docker on Linux. For example, on Ubuntu:
+
+  ```bash
+  sudo apt-get update
+  sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt-get update
+  sudo apt-get install docker-ce docker-ce-cli containerd.io
+  ```
+
+- Verify the installation by running:
+
+  ```bash
+  docker --version
+  ```
+
+### Cloning and Building the Project
+
+1. **Clone the Project:**
+
+   ```bash
+   git clone https://github.com/your-username/atdev-technical-assessment.git
+   cd atdev-technical-assessment
+   ```
+
+2. **Build the Container:**
+
+   Use Docker Compose to build the image and start the container:
+
+   ```bash
+   docker-compose up --build
+   ```
+
+3. **Verify the Container is Running:**
+
+   Check that the container is running with:
+
+   ```bash
+   docker ps
+   ```
+
+   Look for a container that exposes port `3000`.
+
+4. **Test the Connection to Port 3000:**
+
+   From your browser or using `curl`, verify that the API is accessible:
+
+   - **Browser:** Visit [http://localhost:3000](http://localhost:3000) (or use your server's IP if on Linux).
+   - **Terminal:**
+
+     ```bash
+     curl http://localhost:3000/
+     ```
 
 ## Running Tests
 
