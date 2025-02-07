@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <paystub>
     <company>{{ company_name }}</company>
+    <logo>{{ logo_path }}</logo>
     <employee>
         <full_name>{{ full_name }}</full_name>
+        <company>{{ company }}</company>
         <position>{{ position }}</position>
         <gross_salary>{{ gross_salary }}</gross_salary>
+        <gross_payment>{{ gross_payment }}</gross_payment>
+        <social_discount>{{ social_discount }}</social_discount>
+        <health_discount>{{ health_discount }}</health_discount>
+        <taxes_discount>{{ taxes_discount }}</taxes_discount>
+        <other_discount>{{ other_discount }}</other_discount>
+        <total_discount>{{ total_discount }}</total_discount>
         <net_payment>{{ net_payment }}</net_payment>
     </employee>
 </paystub>
