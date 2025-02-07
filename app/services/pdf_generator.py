@@ -22,7 +22,7 @@ def get_templates():
     return template_xml, template_xsl_str
 
 
-def _get_pdf_values_from_entry(entry):
+def _get_pdf_values_from_entry(entry, company_name):
     values = entry.dict()
     values["total_discount"] = (
         values.get("social_discount", 0)
@@ -30,14 +30,13 @@ def _get_pdf_values_from_entry(entry):
         + values.get("taxes_discount", 0)
         + values.get("other_discount", 0)
     )
-    values["company"] = "FakeClients"
+    values["company"] = company_name  # Usamos el valor recibido
     return values
-
 
 def generate_pdf(entry, company_name, country="en"):
     template_xml, template_xsl_str = get_templates()
 
-    xml_values = _get_pdf_values_from_entry(entry)
+    xml_values = _get_pdf_values_from_entry(entry, company_name)
 
     xml_str = template_xml.render(company_name=company_name, **xml_values)
 

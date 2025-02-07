@@ -2,10 +2,13 @@ import os
 import pytest
 from app.services import pdf_generator
 from app.models.payroll_entry import PayrollEntry
-
+from app.config import config
 from app.tests.test_data.payroll_fixtures_sample import dummy_entry, dummy_entry_two, patch_pdfkit
 
-def test_generate_pdf_structure(dummy_entry, patch_pdfkit):
+def test_generate_pdf_structure(dummy_entry, patch_pdfkit, monkeypatch):
+    # Forzamos que, durante el test, se use el directorio "paystubs"
+    monkeypatch.setattr(config, "FILES_PATH", "paystubs")
+    
     company_name = "Test Company"
     pdf_file = pdf_generator.generate_pdf(dummy_entry, company_name)
     
@@ -17,7 +20,9 @@ def test_generate_pdf_structure(dummy_entry, patch_pdfkit):
         content = f.read()
     assert "PDF content simulation" in content
 
-def test_generate_pdf_data_output(dummy_entry, dummy_entry_two, patch_pdfkit):
+def test_generate_pdf_data_output(dummy_entry, dummy_entry_two, patch_pdfkit, monkeypatch):
+    monkeypatch.setattr(config, "FILES_PATH", "paystubs")
+    
     company_name = "Another Company"
     pdf_file1 = pdf_generator.generate_pdf(dummy_entry, company_name)
     pdf_file2 = pdf_generator.generate_pdf(dummy_entry_two, company_name)
