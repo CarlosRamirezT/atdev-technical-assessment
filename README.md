@@ -261,6 +261,20 @@ curl -X POST "http://localhost:3000/api/process?country=es&credentials=user+pwd&
      -F "file=@app/tests/test_data/test_sample.csv"
 ```
 
+### Test with correct user
+
+```bash
+curl -X POST -u test_user:test_password "http://localhost:3000/api/process?country=en&credentials&company=atdev" \
+     -F "file=@app/tests/test_data/test_sample.csv"
+```
+
+### Test with incorrect user
+
+```bash
+curl -X POST -u wrong_user:wrong_password "http://localhost:3000/api/process?country=en&credentials&company=atdev" \
+     -F "file=@app/tests/test_data/test_sample.csv"
+```
+
 ## Contributing
 
 Contributions are welcome! Please follow best development practices and include unit tests for any significant changes.
