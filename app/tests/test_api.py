@@ -4,11 +4,17 @@ import pytest
 from fastapi.testclient import TestClient
 from app.main import app
 
+# Automatically set the environment variables for authentication for all tests in this module.
+@pytest.fixture(autouse=True)
+def set_env(monkeypatch):
+    monkeypatch.setenv("API_USER", "test_user")
+    monkeypatch.setenv("API_PWD", "test_password")
+
 @pytest.fixture
 def client():
     return TestClient(app)
 
-def dummy_generate_pdf(entry, company_name):
+def dummy_generate_pdf(entry, company_name, country="en"):
     return f"dummy_paystubs/{entry.email}.pdf"
 
 def dummy_send_email(email, pdf_path):
@@ -16,10 +22,7 @@ def dummy_send_email(email, pdf_path):
 
 def test_process_payroll_api(monkeypatch, client):
     """
-    Test the /api/process endpoint:
-      - Simulate sending a CSV file with two records.
-      - Monkeypatch the PDF generation and email sending functions.
-      - Verify that the response has the expected format and contains success data for both records.
+    Test the /api/process endpoint with basic authentication.
     """
     monkeypatch.setattr("app.services.pdf_generator.generate_pdf", dummy_generate_pdf)
     monkeypatch.setattr("app.services.email_service.send_email", dummy_send_email)
@@ -36,13 +39,14 @@ def test_process_payroll_api(monkeypatch, client):
     file_like = io.BytesIO(csv_content)
     file_like.name = "test_sample.csv"
     
+    # Use the correct query parameter "company" instead of "company_name"
     response = client.post(
-        "/api/process?company_name=TestCompany",
+        "/api/process?company=TestCompany",
+        auth=("test_user", "test_password"),
         files={"file": (file_like.name, file_like, "text/csv")}
     )
     
     assert response.status_code == 200
-    
     data = response.json()
     assert "success" in data
     assert data["success"] is True
@@ -59,3 +63,4 @@ def test_process_payroll_api(monkeypatch, client):
     if os.path.exists(temp_dir):
         for file in os.listdir(temp_dir):
             os.remove(os.path.join(temp_dir, file))
+

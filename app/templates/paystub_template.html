@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { font-size: 24px; color: #333; }
+        table { width: 100%; border-collapse: collapse; }
+        td, th { padding: 8px; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <img src="{{ logo_path }}" alt="Company Logo" width="200">
+    <h1>{{ company_name }} - {{ translations['paystub_payment'] }}</h1>
+
+    <p><strong>Employee:</strong> {{ full_name }}</p>
+    <p><strong>Position:</strong> {{ title }}</p>
+    
+    <table>
+        <tr>
+            <td><strong>{{ translations['gross_salary'] }}</strong></td>
+            <td>{{ gross_salary }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ translations['gross_payment'] }}</strong></td>
+            <td>{{ gross_payment }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ translations['social_security'] }}</strong></td>
+            <td>{{ social_discount }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ translations['health_insurance'] }}</strong></td>
+            <td>{{ health_discount }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ translations['taxes'] }}</strong></td>
+            <td>{{ taxes_discount }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ translations['others'] }}</strong></td>
+            <td>{{ other_discount }}</td>
+        </tr>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td>{{ total_discount }}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ translations['net_payment'] }}</strong></td>
+            <td>{{ net_payment }}</td>
+        </tr>
+    </table>
+</body>
+</html>
