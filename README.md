@@ -234,16 +234,30 @@ curl http://localhost:3000/
 
 ## Running Tests
 
-To execute all unit and integration tests, run:
+### To execute all unit and integration tests, run:
 
 ```bash
 pytest --maxfail=1 --disable-warnings -q
 ```
 
-To send a file using curl in terminal, run from inside the project folder:
+### To send a file using curl in terminal, run from inside the project folder:
 
 ```bash
-curl -X POST "http://localhost:3000/api/process?country=do&credentials=user+pwd&company=atdev" \
+curl -X POST "http://localhost:3000/api/process?country=en&credentials=user+pwd&company=atdev" \
+     -F "file=@app/tests/test_data/test_sample.csv"
+```
+
+### Test the English version
+
+```bash
+curl -X POST "http://localhost:3000/api/process?country=en&credentials=user+pwd&company=atdev" \
+     -F "file=@app/tests/test_data/test_sample.csv"
+```
+
+### Test the Spanish version
+
+```bash
+curl -X POST "http://localhost:3000/api/process?country=es&credentials=user+pwd&company=atdev" \
      -F "file=@app/tests/test_data/test_sample.csv"
 ```
 
