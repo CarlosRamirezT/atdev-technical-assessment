@@ -1,19 +1,20 @@
 import os
 import shutil
 from datetime import datetime
-from fastapi import APIRouter, File, UploadFile, Query, HTTPException
+from fastapi import APIRouter, File, UploadFile, Query, HTTPException, Depends
 from app.services.file_handler import process_csv
 from app.services.pdf_generator import generate_pdf
 from app.services.email_service import send_email
+from app.authentication import get_current_username
 
 router = APIRouter()
-
 
 @router.post("/process", summary="Process payroll CSV file and send paystub PDFs")
 async def process_payroll(
     company: str = Query(..., description="Name of the company"),
     country: str = Query(default="do", description="Country code (default: 'do')"),
     file: UploadFile = File(..., description="CSV file containing payroll data"),
+    username: str = Depends(get_current_username)
 ):
     temp_dir = "temp"
     if not os.path.exists(temp_dir):
