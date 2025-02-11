@@ -98,26 +98,33 @@ source ~/.zshrc  # or source ~/.bashrc
 
 ### 3. Install Python 3.9.21
 
-Use pyenv to install Python 3.9.21:
+Use pyenv to install Python 3.9.18:
 
 ```bash
-pyenv install 3.9.21
-pyenv global 3.9.21
+pyenv install 3.9.18
+pyenv global 3.9.18
 ```
 
 Verify the installation:
 
 ```bash
-python --version  # Should display: Python 3.9.21
+pyenv version list
 ```
 
 ### 4. Create a Virtual Environment
 
+Load the pyenv virtualenv tool to the shell and .bash_profile
+
+```bash
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+```
+
 From the root of the project, create and activate a virtual environment:
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # On macOS/Linux
+pyenv virtualenv 3.9.18 atdev
+pyenv activate atdev
 ```
 
 ### 5. Install Project Dependencies
@@ -140,6 +147,12 @@ wkhtmltopdf --version
 ```
 
 ### 7. Run the Application
+
+Copy the .env-example file
+
+```bash
+cp .env-example .env
+```
 
 Start the application using uvicorn:
 
@@ -243,21 +256,21 @@ pytest --maxfail=1 --disable-warnings -q
 ### To send a file using curl in terminal, run from inside the project folder:
 
 ```bash
-curl -X POST "http://localhost:3000/api/process?country=en&credentials=user+pwd&company=atdev" \
+curl -X POST -u test_user:test_password "http://localhost:3000/api/process?country=en&credentials=user+pwd&company=atdev" \
      -F "file=@app/tests/test_data/test_sample.csv"
 ```
 
 ### Test the English version
 
 ```bash
-curl -X POST "http://localhost:3000/api/process?country=en&credentials=user+pwd&company=atdev" \
+curl -X POST -u test_user:test_password "http://localhost:3000/api/process?country=en&credentials=user+pwd&company=atdev" \
      -F "file=@app/tests/test_data/test_sample.csv"
 ```
 
 ### Test the Spanish version
 
 ```bash
-curl -X POST "http://localhost:3000/api/process?country=es&credentials=user+pwd&company=atdev" \
+curl -X POST -u test_user:test_password "http://localhost:3000/api/process?country=es&credentials=user+pwd&company=atdev" \
      -F "file=@app/tests/test_data/test_sample.csv"
 ```
 
